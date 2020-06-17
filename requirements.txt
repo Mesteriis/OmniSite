@@ -1,0 +1,15 @@
+asgiref~=3.2.7
+autopep8
+Django==3.0.7
+pycodestyle
+pytz~=2020.1
+sqlparse~=0.3.1
+Unipath~=1.1
+dj-database-url
+python-decouple
+gunicorn
+whitenoise
+requests~=2.23.0
+
+pip~=20.1.1
+setuptools~=47.3.1

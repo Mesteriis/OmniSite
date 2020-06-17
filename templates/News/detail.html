@@ -1,0 +1,13 @@
+{% extends 'wapper.html' %}
+{% block content %}
+<title>{{ get_news.title }}</title>
+    <div class="container">
+        <h1>{{ get_news.title }}</h1>
+
+        <span class="text-muted"> {{ get_news.date }}</span>
+        <br>
+        <a href="../"> Вернутся назад</a> <br><br>
+        <p class="text-justify">{{ get_news.post }}</p>
+        <a class="float-right" href="../"> Вернутся назад</a>
+    </div>
+{% endblock %}
