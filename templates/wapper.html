@@ -9,6 +9,9 @@
     <link rel="icon" href="{% static 'favicon.svg' %}"/>
     <title>OmniPRO</title>
     <script src="{% static 'js/popper.min.js' %}"></script>
+{##}
+{#    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.17/js/bootstrap-select.min.js">#}
+{#    </script>#}
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
             integrity="sha256-4+XzXVhsDmqanXGHaHvgh1gMQKX40OUvDEBTu8JcmNs="
             crossorigin="anonymous">
@@ -96,30 +99,155 @@
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title  mt-auto mb-auto" id="exampleModalLongTitle" style="vertical-align:  middle;">Новый тикет в Отдел</h5>
-                    <button id="S_DepBTN" value="S_techSupport" type="button" class="btn btn-outline-primary ml-2">Технической поддержки</button>
-                            <button type="button" class="btn btn-primary dropdown-toggle dropdown-toggle-split"
-                                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <span class="sr-only">Toggle Dropdown</span>
-                            </button>
-                            <div class="dropdown-menu">
-                                <a id="S_techSupport" class="dropdown-item S_depDDM nav-link ">Технической поддержки</a>
-                                <a id="S_Accounting" class="dropdown-item S_depDDM">Бухгалтерия</a>
-                                <a id="S_Sale" class="dropdown-item S_depDDM">Продаж</a>
-                                <div class="dropdown-divider"></div>
-                                <a id="S_Other" class="dropdown-item S_depDDM" >Devs</a>
-                            </div>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
+                    <div class="input-group mb-3">
+                        <div class="input-group-prepend">
+                            <label class="input-group-text titleFormItem" for="depsSelect">Тикет в отдел </label>
+                        </div>
+                        <select class="custom-select" id="depsSelect">
+                            <option value="" disabled selected>Выберите отдел обращения</option>
+                            <option value="S_techSupportDiv" class="deps">Тех поддержки</option>
+                            <option value="S_AccDiv" class="deps">Бухгалтерии</option>
+                            <option value="S_techSupportDiv" disabled class="deps">Продаж</option>
+                            <option value="S_Devs" class="deps">Devs</option>
+                        </select>
+                    </div>
                 </div>
                 <div class="modal-body">
-
-
+                    <div class="depsForm" id="S_techSupportDiv" style="display: none">
+                        <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                                <label class="input-group-text titleFormItem" for="inputGroupSelect01">Тип
+                                    запроса</label>
+                            </div>
+                            <select class="custom-select" id="inputGroupSelect01">
+                                <option selected>Выбор...</option>
+                                <option value="1" title="Сливы топлива, поломка оборудования">Инцидент</option>
+                                <option value="2" title="Отсутствие данных в системе">Нет
+                                    данных
+                                </option>
+                                <option value="3" title="Вопросы по работе в Web кабинетах">Инструктаж
+                                    Web
+                                </option>
+                                <option value="4" title="Вопросы по работе в мобильных приложениях">Инструктаж
+                                    Mobail
+                                </option>
+                            </select>
+                        </div>
+                        <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                                    <span class="input-group-text titleFormItem" id="basic-addon1"
+                                          title="Используется в отслеживании">Заголовок</span>
+                            </div>
+                            <input type="text" class="form-control" placeholder="Заголовок" aria-label="Title"
+                                   aria-describedby="basic-addon1">
+                        </div>
+                        <div class="form-group">
+                            <label for="exampleFormControlTextarea1">Опишите проблему</label>
+                            <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+                        </div>
+                        <div class="input-group" style="margin-bottom: 1rem;">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text titleFormItem" id="">Контакты </span>
+                            </div>
+                            <input type="text" placeholder="ФИО" class="form-control">
+                            <input type="text" placeholder="Телефон" class="form-control">
+                        </div>
+                        <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                                <button class="btn btn-outline-secondary titleFormItem" type="button">Снять текший
+                                    экран
+                                </button>
+                            </div>
+                            <div class="custom-file">
+                                <input type="file" class="custom-file-input" id="inputGroupFile03">
+                                <label class="custom-file-label" for="inputGroupFile03">Выбрать файл</label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="depsForm" id="S_AccDiv" style="display: none">
+                        <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                                <label class="input-group-text titleFormItem" for="inputGroupSelect01">Тип
+                                    запроса</label>
+                            </div>
+                            <select class="custom-select" id="inputGroupSelect01">
+                                <option disabled selected>Выбор...</option>
+                                <option value="a1" title="Сливы топлива, поломка оборудования">Оплата</option>
+                                <option value="a2" title="Отсутствие данных в системе">Акты сверки</option>
+                                <option value="a3" title="Вопросы по работе в Web кабинетах">Перенос платежа</option>
+                                <option value="a4" title="Вопросы по работе в мобильных приложениях">Запрос документов</option>
+                            </select>
+                        </div>
+                        <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                                    <span class="input-group-text titleFormItem" id="basic-addon1"
+                                          title="Используется в отслеживании">Заголовок</span>
+                            </div>
+                            <input type="text" class="form-control" placeholder="Заголовок" aria-label="Title"
+                                   aria-describedby="basic-addon1">
+                        </div>
+                        <div class="form-group">
+                            <label for="exampleFormControlTextarea1">Поянения</label>
+                            <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+                        </div>
+                        <div class="input-group" style="margin-bottom: 1rem;">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text titleFormItem" id="">Контакты </span>
+                            </div>
+                            <input type="text" placeholder="ФИО" class="form-control">
+                            <input type="text" placeholder="Телефон" class="form-control">
+                        </div>
+                        <div class="input-group mb-3">
+                            <div class="custom-file">
+                                <input type="file" class="custom-file-input" id="inputGroupFile03">
+                                <label class="custom-file-label" for="inputGroupFile03">Выбрать файл</label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="depsForm" id="S_Devs" style="display: none">
+                        <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                                <label class="input-group-text titleFormItem" for="inputGroupSelect01">Тип
+                                    запроса</label>
+                            </div>
+                            <select class="custom-select" id="inputGroupSelect01">
+                                <option selected>Выбор...</option>
+                                <option value="1" title="Сливы топлива, поломка оборудования">Нашли ошибку</option>
+                                <option value="2" title="Отсутствие данных в системе">Идея для разработки</option>
+                                <option value="3" title="Вопросы по работе в Web кабинетах">Добавления функционала</option>
+                                <option value="4" title="Вопросы по работе в мобильных приложениях">Не стандартные отчеты</option>
+                            </select>
+                        </div>
+                        <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                                    <span class="input-group-text titleFormItem" id="basic-addon1"
+                                          title="Используется в отслеживании">Заголовок</span>
+                            </div>
+                            <input type="text" class="form-control" placeholder="Заголовок" aria-label="Title"
+                                   aria-describedby="basic-addon1">
+                        </div>
+                        <div class="form-group">
+                            <label for="exampleFormControlTextarea1">Описание</label>
+                            <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+                        </div>
+                        <div class="input-group" style="margin-bottom: 1rem;">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text titleFormItem" id="">Контакты </span>
+                            </div>
+                            <input type="text" placeholder="ФИО" class="form-control">
+                            <input type="text" placeholder="Телефон" class="form-control">
+                        </div>
+                        <div class="input-group mb-3">
+                            <div class="custom-file">
+                                <input type="file" class="custom-file-input" id="inputGroupFile03">
+                                <label class="custom-file-label" for="inputGroupFile03">Выбрать файл</label>
+                            </div>
+                        </div>
+                    </div>
                 </div>
                 <div class="modal-footer">
                     <label class="mr-auto">
-                        <input id="isObserv" type="checkbox" value=""> Взять на контроль
+                        <input id="isObserv" type="checkbox" value=""> Следить за выполнением
                     </label>
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Закрыть</button>
                     <button type="button" class="btn btn-primary" form="SupportModal" value="Submit">Отправить</button>
@@ -130,17 +258,41 @@
 </div>
 
 <script>
+    $('select').on('change', function(){
+        switch (this.value) {
+            case 'S_techSupportDiv':{
+                $('.depsForm').hide()
+                $('#S_techSupportDiv').show()
+                break;
+            }
+            case 'S_AccDiv':{
+                $('.depsForm').hide()
+                $('#S_AccDiv').show()
+                break;
+            }
+            case 'd3':{
+                break;
+            }
+            case 'S_Devs':{
+                $('.depsForm').hide()
+                $('#S_Devs').show()
+                break;
+            }
+        }
 
-    $('.S_depDDM').on('click', function () {
-        $('#S_DepBTN').val(this.id)
-        $('#S_DepBTN').text(this.text)
-        console.log(this)
-    })
+});
+
+
 </script>
+<style>
+    .titleFormItem {
+        min-width: 180px;
+    }
+</style>
 {% block scriptAndStyles_after %}
 
 
- {% endblock %}
+{% endblock %}
 </body>
 <style>
 
