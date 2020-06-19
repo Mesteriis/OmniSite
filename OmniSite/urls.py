@@ -36,4 +36,6 @@ urlpatterns = [
     # admin
     path('admin/', admin.site.urls),
 
+    # mail senf
+    path('sendmail/send', viewsOmniSite.sendMail, name='sendMail'),
 ]

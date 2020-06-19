@@ -30,6 +30,19 @@ DEBUG = True
 ALLOWED_HOSTS = ['*']
 # X_FRAME_OPTIONS = 'SAMEORIGIN'
 
+# mail settings
+EMAIL_HOST = 'smtp.mail.ru'
+EMAIL_PORT = 2525
+EMAIL_HOST_USER = "a.meshcheryakov@omnicomm.pro"
+EMAIL_HOST_PASSWORD = "q1w2e3w2e3"
+EMAIL_USE_TLS = True
+
+SERVER_EMAIL = 'a.meshcheryakov@omnicomm.pro'
+DEFAULT_FROM_EMAIL = 'a.meshcheryakov@omnicomm.pro'
+
+EMAIL_BACKEND = 'django.core.mail.backends.filebased.EmailBackend'
+EMAIL_FILE_PATH = '/app-messages' # change this to a proper location
+
 # Application definition
 
 INSTALLED_APPS = [

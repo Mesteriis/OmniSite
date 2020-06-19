@@ -12,15 +12,17 @@
     {#screenshot#}
     <script src="{% static 'js/html2canvas.min.js' %}"></script>
     <script src="{% static 'js/FileSaver.js' %}"></script>
-
     {#    <!-- Old -->#}
     <script src="{% static 'js/old/Blob.js' %}"></script>
     <script src="{% static 'js/old/canvas-toBlob.js' %}"></script>
+    <script src="{% static 'js/jq/jquery-3.5.1.min.js' %}"></script>
 
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
-            integrity="sha256-4+XzXVhsDmqanXGHaHvgh1gMQKX40OUvDEBTu8JcmNs="
-            crossorigin="anonymous">
-    </script>
+
+{#    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.2/jquery.validate.min.js"></script>#}
+{#    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.2/localization/messages_ru.min.js"></script>#}
+
+{#    <script src="https://code.jquery.com/jquery-3.5.1.min.js" integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>#}
+
     <script src="https://code.jquery.com/ui/1.12.0/jquery-ui.min.js"
             integrity="sha256-eGE6blurk5sHj+rmkfsGYeKyZx3M4bG+ZlFyA7Kns7E="
             crossorigin="anonymous">
@@ -57,7 +59,7 @@
             <a class="p-2 text-dark" href="{% url 'News' %}">Новости</a>
             <a class="p-2 text-dark" href="{% url 'joniAs' %}">Стать клиентом</a>
             <!--a class="p-2 text-dark" href="{% url 'dashboard-new' %}">DashBoard</a-->
-            <a type="button" class="p-2 text-dark" data-toggle="modal"
+            <a class="p-2 text-dark" data-toggle="modal"
                data-target=".bd-modal-lg-support">Support</a>
         </nav>
         <a id="Enter" class="btn btn-outline-primary" href="{% url 'dashboard' %}">Войти</a>
@@ -107,8 +109,9 @@
 <style>
 
 </style>
+
 <div>
-    <div id="SupportModal" class="modal-body">
+    <div id="SupportModal" class="modal-body form">
         {% csrf_token %}
         <div class="modal fade bd-modal-lg-support" tabindex="-1" role="dialog"
              aria-labelledby="myLargeModalLabel" aria-hidden="true">
@@ -123,7 +126,7 @@
                                 <option value="" disabled selected>Выберите отдел обращения</option>
                                 <option value="S_techSupportDiv" class="deps">Тех поддержки</option>
                                 <option value="S_AccDiv" class="deps">Бухгалтерии</option>
-                                <option value="S_techSupportDiv" disabled class="deps">Продаж</option>
+                                <option value="S_SaleDiv" disabled class="deps">Продаж</option>
                                 <option value="S_Devs" class="deps">Devs</option>
                             </select>
                         </div>
@@ -132,19 +135,19 @@
                         <div class="depsForm" id="S_techSupportDiv" style="display: none">
                             <div class="input-group mb-3">
                                 <div class="input-group-prepend">
-                                    <label class="input-group-text titleFormItem" for="inputGroupSelect01">Тип
+                                    <label class="input-group-text titleFormItem" for="s_typeTicket">Тип
                                         запроса</label>
                                 </div>
-                                <select class="custom-select" id="inputGroupSelect01">
-                                    <option selected>Выбор...</option>
-                                    <option value="1" title="Сливы топлива, поломка оборудования">Инцидент</option>
-                                    <option value="2" title="Отсутствие данных в системе">Нет
+                                <select class="custom-select" id="s_typeTicket">
+                                    <option selected disabled>Выбор...</option>
+                                    <option value="stt1" title="Сливы топлива, поломка оборудования">Инцидент</option>
+                                    <option value="stt2" title="Отсутствие данных в системе">Нет
                                         данных
                                     </option>
-                                    <option value="3" title="Вопросы по работе в Web кабинетах">Инструктаж
+                                    <option value="stt3" title="Вопросы по работе в Web кабинетах">Инструктаж
                                         Web
                                     </option>
-                                    <option value="4" title="Вопросы по работе в мобильных приложениях">Инструктаж
+                                    <option value="stt4" title="Вопросы по работе в мобильных приложениях">Инструктаж
                                         Mobail
                                     </option>
                                 </select>
@@ -154,25 +157,27 @@
                                     <span class="input-group-text titleFormItem" id="basic-addon1"
                                           title="Используется в отслеживании">Заголовок</span>
                                 </div>
-                                <input type="text" class="form-control" placeholder="Заголовок" aria-label="Title"
+                                <input id="s_TitleTicket" type="text" class="form-control" placeholder="Заголовок"
+                                       aria-label="Title"
                                        aria-describedby="basic-addon1">
                             </div>
                             <div class="form-group">
-                                <label for="exampleFormControlTextarea1">Опишите проблему</label>
-                                <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+                                <label for="s_noteTicket">Опишите проблему</label>
+                                <textarea id="s_noteTicket" class="form-control" rows="3"></textarea>
                             </div>
                             <div class="input-group" style="margin-bottom: 1rem;">
                                 <div class="input-group-prepend">
                                     <span class="input-group-text titleFormItem" id="">Контакты </span>
                                 </div>
-                                <input type="text" placeholder="ФИО" class="form-control">
-                                <input type="text" placeholder="Телефон" class="form-control">
+                                <input id="s_contactName" name="name" type="text" placeholder="ФИО"
+                                       class="form-control required">
+                                <input id="s_contactTel" name='phone' type="text" placeholder="Телефон"
+                                       class="form-control required">
                             </div>
                             <div class="input-group mb-3">
                                 <div class="input-group-prepend">
                                     <button id="getScreeShot" class="btn btn-outline-secondary titleFormItem"
-                                            type="button">Снять текший
-                                        экран
+                                            type="button">Снять текший экран
                                     </button>
                                 </div>
                                 <div class="custom-file">
@@ -260,8 +265,8 @@
                                 <div class="input-group-prepend">
                                     <span class="input-group-text titleFormItem" id="">Контакты </span>
                                 </div>
-                                <input type="text" placeholder="ФИО" class="form-control">
-                                <input type="text" placeholder="Телефон" class="form-control">
+                                <input id="d_contactName" type="text" placeholder="ФИО" class="form-control">
+                                <input id="d_contactTel" type="text" placeholder="Телефон" class="form-control">
                             </div>
                             <div class="input-group mb-3">
                                 <div class="custom-file">
@@ -273,10 +278,13 @@
                     </div>
                     <div class="modal-footer">
                         <label class="mr-auto">
-                            <input id="isObserv" type="checkbox" value=""> Следить за выполнением
+                            <input id="isObserv" type="checkbox"> Следить за выполнением
                         </label>
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Закрыть</button>
-                        <button type="button" class="btn btn-primary" form="SupportModal" value="Submit">Отправить
+                        <button id="closeBtnFormSupport" type="button" class="btn btn-secondary" data-dismiss="modal">
+                            Закрыть
+                        </button>
+                        <button id="submitBtnFormSupport" type="button" class="btn btn-primary" form="SupportModal"
+                                value="Submit">Отправить
                         </button>
                     </div>
                 </div>
@@ -285,7 +293,7 @@
     </div>
 
     <script>
-        let arrScreenShot=new Array();
+        let arrScreenShot = new Array();
         $('select').on('change', function () {
             switch (this.value) {
                 case 'S_techSupportDiv': {
@@ -311,7 +319,7 @@
         });
         $(document).ready(function () {
             console.log(arrScreenShot.length);
-            if (arrScreenShot.length > 4){
+            if (arrScreenShot.length > 4) {
 
             }
             $('#getScreeShot').click(function (e) {
@@ -334,32 +342,93 @@
                     let tmpSTR = $('<span class="badge badge-light ml-1" id="Scr-' + (arrScreenShot.length - 1) + '-CloseBtn">&times;</span>')
                     $(divImg).append(tmpSTR)
                     $('#ScreenShotPrevPlace').append(divImg)
-                    if (arrScreenShot.length > 4){
+                    if (arrScreenShot.length > 4) {
                         $('#getScreeShot').hide()
                     }
                     $(tmpSTR).on('click', function () {
                         {#console.log(this)#}
-                        let i ='Scr-0-CloseBtn'
+                        let i = 'Scr-0-CloseBtn'
                         delete arrScreenShot[i]
                         $(this).parent().remove()
-                        if (arrScreenShot.length >= 5){
-                        $('#getScreeShot').show()
-                    }
+                        if (arrScreenShot.length >= 5) {
+                            $('#getScreeShot').show()
+                        }
                     })
                     {#canvas.toBlob(function(blob) {#}
-                        {#saveAs(blob, "screenshoot.png");#}
+                    {#saveAs(blob, "screenshoot.png");#}
                     //});
                 });
             });
         });
+        $('#closeBtnFormSupport').on('click', function () {
 
+        })
+        $('#submitBtnFormSupport').on('click', function () {
+            switch ($('#depsSelect').val()) {
 
+                case 'S_techSupportDiv': {
+                    {#$("#S_techSupportDiv").validate(); TODO доделать валидацию #}
+                    let person = {
+                        'fio': $('#s_contactName').val(),
+                        'tel': $('#s_contactTel').val(),
+                        'user': '',
+                        'firm': '',
+                        'userTel': ''
+                    };
+                    let pack = {
+                        {#^((8|\+7)[\- ]?)?(\(?\d{3}\)?[\- ]?)?[\d\- ]{7,10}$#}
+                        'dep': 'Support',
+                        'type': $('#s_typeTicket option:selected').text(),
+                        'title': $('#s_TitleTicket').val(),
+                        'note': $('#s_noteTicket').val(),
+                        'person': JSON.stringify(person),
+                        'src': JSON.stringify(arrScreenShot),
+                        'time': new Date().toLocaleString(),
+                        'isObserv': $('#isObserv').val(),
+                    }
+                    {#JSON.stringify(pack)#}
+                    {#console.log(pack);#}
+                    $.post('{% url 'sendMail' %}', JSON.stringify(pack)).then(res=>console.log(res))
+                    {#$.ajax({#}
+                    {#    type: "POST",#}
+                    {#    url: '{% url 'sendMail' %}',#}
+                    {#    data: JSON.stringify(pack),#}
+                    {#    success: function (data, textStatus, jqXHR) {#}
+                    {#        alert('DONE')#}
+                    {#    },#}
+                    {#    dataType: 'text',#}
+                    {#    async: true,#}
+                    {#    error: function (num) {#}
+                    {#        alert("эБеда");#}
+                    {#    },#}
+                    {#    timeout:5000#}
+                    {#});#}
+                    break;
+                }
+                case 'S_AccDiv': {
+                    break;
+                }
+                case 'S_SaleDiv': {
+                    break;
+                }
+                case 'S_Devs': {
+                    break;
+                }
+                default: {
+                    alert("Перед отправкой необходимо заполнить все поля формы")
+
+                    break;
+                }
+            }
+
+        })
     </script>
     <style>
         .titleFormItem {
             min-width: 180px;
         }
-        .placeHolderScreenshot{
+
+        .placeHolderScreenshot {
             position: relative;
             width: 150px;
             height: 150px;
@@ -368,14 +437,16 @@
             display: inline-block;
             margin: 1px;
         }
-        .placeHolderScreenshot img{
+
+        .placeHolderScreenshot img {
             position: absolute;
             width: 140px;
             height: 140px;
             bottom: 0;
             left: 0;
         }
-        .placeHolderScreenshot span{
+
+        .placeHolderScreenshot span {
             position: absolute;
             right: 2px;
             top: 2px;
