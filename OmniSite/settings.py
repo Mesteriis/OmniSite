@@ -40,8 +40,8 @@ EMAIL_USE_TLS = True
 SERVER_EMAIL = 'a.meshcheryakov@omnicomm.pro'
 DEFAULT_FROM_EMAIL = 'a.meshcheryakov@omnicomm.pro'
 
-EMAIL_BACKEND = 'django.core.mail.backends.filebased.EmailBackend'
-EMAIL_FILE_PATH = '/app-messages' # change this to a proper location
+# EMAIL_BACKEND = 'django.core.mail.backends.filebased.EmailBackend'
+# EMAIL_FILE_PATH = '/app-messages' # change this to a proper location
 
 # Application definition
 
