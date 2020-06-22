@@ -9,7 +9,12 @@ dj-database-url
 python-decouple
 gunicorn
 whitenoise
-requests~=2.23.0
-
+requests~=2.24.0
+Pillow
 pip~=20.1.1
 setuptools~=47.3.1
+django-3-jet
+six
+google-api-python-client~=1.9.3
+FeedParser
+django-private-chat

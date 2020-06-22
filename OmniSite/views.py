@@ -51,7 +51,7 @@ def sendMail(request):
         ['avm@sh-inc.ru'],
         fail_silently=False,
     )
-    print('send');
+    print('send')
     # template = ''
     # print (pack['src'])
     content = {

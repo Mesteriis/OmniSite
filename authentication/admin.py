@@ -1,6 +1,5 @@
 from django.contrib import admin
-from . import models
+from .models import Profile, Notification
 
-
-
-admin.site.register(models.Profile)
+admin.site.register(Profile)
+admin.site.register(Notification)

@@ -22,11 +22,9 @@ def waitInvoiceStatus(invoice):
     return idFirm, sum
 
 
-
 class AccountingList(models.Model):
-
-    date = models.DateTimeField (auto_now_add=True, verbose_name='Дата операции')
-    SaldoBefore = models.DecimalField (max_digits=8, decimal_places=2, default='0.00')
+    date = models.DateTimeField(auto_now_add=True, verbose_name='Дата операции')
+    SaldoBefore = models.DecimalField(max_digits=8, decimal_places=2, default='0.00')
     DEBET = 'dt'
     CREDIT = 'ct'
     PROMISED = 'pr'
@@ -35,15 +33,16 @@ class AccountingList(models.Model):
         (CREDIT, 'Расход'),
         (PROMISED, 'Обещанный платеж'),
     )
-    typeActivity = models.CharField(max_length=2, choices=typesActivity, default = CREDIT, verbose_name='Тип операции')
-    sum = models.PositiveIntegerField (verbose_name='Сумма операции' )
-    SaldoAfter = models.DecimalField ( max_digits=8, decimal_places=2, default =  '0.00' )
-    Comment = models.CharField ( max_length=300, verbose_name='Комментарий блокировки' )
+    typeActivity = models.CharField(max_length=2, choices=typesActivity, default=CREDIT, verbose_name='Тип операции')
+    sum = models.PositiveIntegerField(verbose_name='Сумма операции')
+    SaldoAfter = models.DecimalField(max_digits=8, decimal_places=2, default='0.00')
+    Comment = models.CharField(max_length=300, verbose_name='Комментарий блокировки')
     # FIXME DO_NOTHING сменить на CASCADE когда будут клиенты
-    idClient = models.ForeignKey('ClientFirm',on_delete=models.DO_NOTHING, verbose_name='Фирма клиента', default = None)
+    idClient = models.ForeignKey('ClientFirm', on_delete=models.DO_NOTHING, verbose_name='Фирма клиента', default=None)
     # FIXME DO_NOTHING сменить на CASCADE когда будут клиенты
-    idPromisedPayment = models.ForeignKey ( 'promisedPayment', on_delete=models.DO_NOTHING, verbose_name='Обещанный платеж', default=None )
-    startDate = models.DateTimeField(auto_now=False, auto_now_add=False, default= None )
+    idPromisedPayment = models.ForeignKey('promisedPayment', on_delete=models.DO_NOTHING,
+                                          verbose_name='Обещанный платеж', default=None)
+    startDate = models.DateTimeField(auto_now=False, auto_now_add=False, default=None)
     endDate = models.DateTimeField(auto_now=False, auto_now_add=False, default=None)
     FINANSE = 'fn'
     TECHNICAL = 'tn'
@@ -54,10 +53,10 @@ class AccountingList(models.Model):
         (REST, 'Остальное'),
     )
     # подумать может быть в отдельную таблицу
-    typeBlock = models.CharField(max_length=2, choices=typesBlock, default = FINANSE, verbose_name='Тип блокировки')
-    isBlock = models.BooleanField(default=False, verbose_name = 'Заблокирован')
+    typeBlock = models.CharField(max_length=2, choices=typesBlock, default=FINANSE, verbose_name='Тип блокировки')
+    isBlock = models.BooleanField(default=False, verbose_name='Заблокирован')
     dateBlock = models.DateField(verbose_name='Дата будущей блокировки', default='')
-    BlockComment = models.CharField(max_length=300, verbose_name = 'Комментарий блокировки')
+    BlockComment = models.CharField(max_length=300, verbose_name='Комментарий блокировки')
 
     # def save(self, *args, **kwargs):
     #     if not self.id:
@@ -70,8 +69,5 @@ class ClientFirm(models.Model):
     name = models.CharField(max_length=120)
 
 
-
-
 class promisedPayment(models.Model):
-    name = models.CharField ( max_length=120 )
-
+    name = models.CharField(max_length=120)

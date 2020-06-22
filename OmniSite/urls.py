@@ -1,12 +1,12 @@
 from django.contrib import admin, auth
-from django.urls import path, include , re_path
+from django.urls import path, include, re_path
 from . import views as viewsOmniSite
 from News import views as newsViews
 from authentication import views as authViews
-from dashboard import views as dashViews
+from dashboardClient import views as dashViews
 
 from django.contrib.auth.views import LogoutView #from auth
-
+from django_private_chat import urls as django_private_chat_urls # Chat
 
 urlpatterns = [
     # Site
@@ -20,21 +20,19 @@ urlpatterns = [
 
     # auth
     path('login/', authViews.login_view, name="login"),
-    path('register/', authViews.register_user, name="register"),
+    # path('register/', authViews.register_user, name="register"),
     path('logout/', LogoutView.as_view(), name="logout"),
 
     # dashboard
-    path('dashboard/page-user.html', dashViews.userPage, name='userPage'),
-    path('dashboard/page-omnicomm.html', dashViews.extOmniComm, name='extOmniComm'),
-    path('dashboard/page-wialon.html', dashViews.extWialon, name='extWialon'),
-    path('dashboard/page-saveDrive.html', dashViews.saveDrive, name='safeDrive'),
-    path('dashboard/', dashViews.dashboard, name='dashboard'),
-    path('dashboard/user', dashViews.getUserSettings, name='userSettings'),
-
-    path('dashboard-n/', dashViews.newDash, name='dashboard-new'),
+    path('dashboardClient/', dashViews.dashboard, name='dashboardClient'),
 
     # admin
+    path('jet/', include('jet.urls', 'jet')),  # Django JET URLS
+    path('jet/dashboard/', include('jet.dashboard.urls', 'jet-dashboard')),  # Django JET dashboard URLS
     path('admin/', admin.site.urls),
+
+    # Chat
+    path('chat/', include('django_private_chat.urls')),
 
     # mail senf
     path('sendmail/send', viewsOmniSite.sendMail, name='sendMail'),

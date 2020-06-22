@@ -13,7 +13,7 @@ https://docs.djangoproject.com/en/3.0/ref/settings/
 import os
 from decouple import config
 from unipath import Path
-
+# from django.contrib.auth.models import User
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
@@ -22,13 +22,14 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # See https://docs.djangoproject.com/en/3.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = '1234567890'
+SECRET_KEY = 'x&hzfjrmx4#23bsm2ab8^4%m8%8n!=w^dh0_*krd_0j(=-t)55'
+
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
-
+# AUTH_USER_MODEL = User
 ALLOWED_HOSTS = ['*']
-# X_FRAME_OPTIONS = 'SAMEORIGIN'
+X_FRAME_OPTIONS = 'SAMEORIGIN'
 
 # mail settings
 EMAIL_HOST = 'smtp.mail.ru'
@@ -43,9 +44,16 @@ DEFAULT_FROM_EMAIL = 'a.meshcheryakov@omnicomm.pro'
 # EMAIL_BACKEND = 'django.core.mail.backends.filebased.EmailBackend'
 # EMAIL_FILE_PATH = '/app-messages' # change this to a proper location
 
+# Chat
+CHAT_WS_SERVER_HOST = 'localhost'
+CHAT_WS_SERVER_PORT = 5002
+CHAT_WS_SERVER_PROTOCOL = 'ws'
+
 # Application definition
 
 INSTALLED_APPS = [
+    'jet.dashboard',
+    'jet',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -54,7 +62,11 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'News.apps.NewsConfig',
     'accountingList.apps.AccountingConfig',
-    'dashboard',
+    'dashboardClient',
+    'authentication',
+    'ourModules.apps.OurmodulesConfig',
+    'django_private_chat',
+
 ]
 
 MIDDLEWARE = [
@@ -134,7 +146,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 LANGUAGE_CODE = 'ru-ru'
 
-TIME_ZONE = 'Europe/Moscow'
+TIME_ZONE = 'UTC'
 
 USE_I18N = True
 
@@ -147,3 +159,4 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.0/howto/static-files/
 
 STATIC_URL = '/static/'
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticROOT')
