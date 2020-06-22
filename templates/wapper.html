@@ -58,7 +58,9 @@
         <nav class="my-2 my-md-0 mr-md-3">
             <a class="p-2 text-dark" href="{% url 'News' %}">Новости</a>
             <a class="p-2 text-dark" href="{% url 'joniAs' %}">Стать клиентом</a>
-            <!--a class="p-2 text-dark" href="{% url 'dashboardClient' %}">DashBoard</a-->
+            {% if user.is_staff %}
+            <a class="p-2 text-dark" href="/admin/">Admin</a>
+            {% endif %}
             <a class="p-2 text-dark" data-toggle="modal"
                data-target=".bd-modal-lg-support">Support</a>
         </nav>
@@ -70,10 +72,10 @@
                 }
 
             </style>
-            <a class="btn btn-outline-primary" href="{% url 'dashboardClient' %}">Баланс: -2000.00 рублей</a>
+            <a id = "EnterIsAuth"class="btn btn-outline-primary" href="{% url 'dashboardClient' %}">Баланс: -2000.00 рублей</a>
             <script>
-                if (document.getElementById('Enter').innerText.indexOf('-') !== -1) {
-                    document.getElementById('Enter').style.color = 'red'
+                if (document.getElementById('EnterIsAuth').innerText.indexOf('-') === 8) {
+                    document.getElementById('EnterIsAuth').style.color = 'red'
                 }
             </script>
         {% endif %}
@@ -376,8 +378,7 @@
         </div>
 
         {{ block.super }}
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/scrollmonitor/1.2.0/scrollMonitor.js"
-            integrity="sha256-BseZlDlA+yL4qu+Voi82iFa5aaifralQEXIjOjaXgeo=" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/scrollmonitor/1.2.0/scrollMonitor.js"></script>
         <script about="Chat">
         let base_ws_server_path = "{{ ws_server_path }}";
         $(document).ready(function () {
