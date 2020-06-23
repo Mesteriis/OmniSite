@@ -91,22 +91,14 @@
 </main>
 
 
-<footer class="footer ">
-    <div class="container-fluid" style="margin: 20px; position: fixed; bottom: 0;">
-        <div class="row">
-            <div class="text-muted text-right"> &copy; Все права защищены 2020г.</div>
-
-
+    <footer class="footer ">
+        <div class="container-fluid" style="margin: 20px; position: fixed; bottom: 0;">
+            <div class="row">
+                <div class="text-muted text-right"> &copy; Все права защищены 2020г.</div>
+            </div>
         </div>
+    </footer>
 
-    </div>
-    </div>
-</footer>
-
-{% block scriptAndStyles_after %}
-
-
-{% endblock %}
 </body>
 <style>
 
@@ -191,6 +183,7 @@
 
                             </div>
                         </div>
+                    {#   <!-- Бухгалтерия -->#} note ACC
                         <div class="depsForm" id="S_AccDiv" style="display: none">
                             <div class="input-group mb-3">
                                 <div class="input-group-prepend">
@@ -234,6 +227,7 @@
                                 </div>
                             </div>
                         </div>
+                    {#   <!-- Разрабочики -->#} note DEVS
                         <div class="depsForm" id="S_Devs" style="display: none">
                             <div class="input-group mb-3">
                                 <div class="input-group-prepend">
@@ -277,6 +271,7 @@
                                 </div>
                             </div>
                         </div>
+                    {#Chat#} NOTE Chat
                         <div class="depsForm" id="Chat" style="display: none">
                             {% load i18n %}
                             <link href="{% static "django_private_chat/css/django_private_chat.css" %}" rel="stylesheet"
@@ -809,7 +804,6 @@
         }
     </style>
     </div>
-
 
     <!-- Modal Error -->
     <div class="modal fade" id="ErrorModal" tabindex="-1" role="dialog"
