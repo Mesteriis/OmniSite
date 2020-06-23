@@ -1,4 +1,4 @@
-asgiref~=3.2.7
+asgiref~=3.2.10
 autopep8
 Django==3.0.7
 pycodestyle
@@ -14,7 +14,12 @@ Pillow
 pip~=20.1.1
 setuptools~=47.3.1
 django-3-jet
-six
+six~=1.15.0
 google-api-python-client~=1.9.3
 FeedParser
 django-private-chat
+httplib2~=0.18.1
+django-braces~=1.14.0
+decouple~=0.0.7
+django-model-utils~=4.0.0
+websockets~=8.1

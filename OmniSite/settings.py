@@ -11,7 +11,7 @@ https://docs.djangoproject.com/en/3.0/ref/settings/
 """
 
 import os
-from decouple import config
+# from decouple import config
 from unipath import Path
 # from django.contrib.auth.models import User
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
@@ -65,7 +65,7 @@ INSTALLED_APPS = [
     'dashboardClient',
     'authentication',
     'ourModules.apps.OurmodulesConfig',
-    'django_private_chat',
+    'privateChat',
 
 ]
 

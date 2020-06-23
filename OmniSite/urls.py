@@ -6,7 +6,7 @@ from authentication import views as authViews
 from dashboardClient import views as dashViews
 
 from django.contrib.auth.views import LogoutView #from auth
-from django_private_chat import urls as django_private_chat_urls # Chat
+from privateChat import urls as privateChat # Chat
 
 urlpatterns = [
     # Site
@@ -32,7 +32,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
 
     # Chat
-    path('chat/', include('django_private_chat.urls')),
+    path('chat/', include('privateChat.urls')),
 
     # mail senf
     path('sendmail/send', viewsOmniSite.sendMail, name='sendMail'),
